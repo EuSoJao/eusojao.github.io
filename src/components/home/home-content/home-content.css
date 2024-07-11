@@ -1,0 +1,6 @@
+section.home-content {
+  background-image: url("img/background/dirt.png");
+  background-size: 56px;
+
+  image-rendering: pixelated;
+}
