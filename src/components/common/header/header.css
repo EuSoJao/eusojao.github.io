@@ -1,0 +1,6 @@
+#header-inner {
+  padding: 8px;
+  background-image: url("img/background/grass_block_side.png");
+  background-size: 56px;
+  image-rendering: pixelated;
+}

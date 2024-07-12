@@ -1,0 +1,12 @@
+img.logo {
+  width: 40px;
+  height: auto;
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: pixelated;
+  transition: 0.3s;
+}
+
+
+img.logo:hover {
+  transform: scale(1.1);
+}
