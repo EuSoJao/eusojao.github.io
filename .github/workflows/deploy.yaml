@@ -1,0 +1,53 @@
+name: 🚀 Deploy website on push
+
+on:
+  # Runs on pushes
+  push:
+    branches: [main]
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# Sets the GITHUB_TOKEN permissions to allow deployment to GitHub Pages
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Allow one concurrent deployment
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  web-deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    name: 🎉 Deploy
+    runs-on: ubuntu-latest
+    steps:
+      - name: 🚚 Checkout
+        uses: actions/checkout@v4
+
+      - name: 🥟 Setup Bun
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+
+      - name: ➕ Install dependencies
+        run: bun install
+
+      - name: 🔨 Build
+        run: bun run build
+
+      - name: 🔧 Setup Pages
+        uses: actions/configure-pages@v4
+
+      - name: 📦 Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: "./dist"
+
+      - name: 🚀 Deploy to GitHub Pages
+        uses: actions/deploy-pages@v4
+        id: deployment
